@@ -1,5 +1,7 @@
 # Passport-Twitch.tv
 
+[![Build Status](https://secure.travis-ci.org/johnkernke/passport-twitchtv.png)](http://travis-ci.org/johnkernke/passport-twitchtv)
+
 [Passport](https://github.com/jaredhanson/passport) strategy for authenticating
 with [Twtich.tv](http://www.twitch.tv/) using the OAuth 2.0 API.
 
