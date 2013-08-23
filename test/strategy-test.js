@@ -31,25 +31,17 @@ vows.describe('TwitchtvStrategy').addBatch({
       // mock
       strategy._oauth.get = function(url, token, tokenSecret, callback) {
         var body = '{ \
-           "image_url_huge": "http:\/\/static-cdn.justin.tv\/jtv_user_pictures\/justin-320x240-4.jpg", \
-           "profile_header_border_color": null, \
-           "favorite_quotes": "I love Justin.tv", \
-           "sex": "Male", \
-           "image_url_large": "http:\/\/static-cdn.justin.tv\/jtv_user_pictures\/justin-125x94-4.jpg", \
-           "profile_about": "Check out my website: www.justin.tv", \
-           "profile_background_color": null, \
-           "image_url_medium": "http:\/\/static-cdn.justin.tv\/jtv_user_pictures\/justin-75x56-4.jpg", \
-           "id": 1698, \
-           "broadcaster": true, \
-           "profile_url": "http:\/\/www.justin.tv\/justin\/profile", \
-           "profile_link_color": null, \
-           "image_url_small": "http:\/\/static-cdn.justin.tv\/jtv_user_pictures\/justin-50x37-4.jpg", \
-           "profile_header_text_color": null, \
-           "name": "The JUST UN", \
-           "image_url_tiny": "http:\/\/static-cdn.justin.tv\/jtv_user_pictures\/justin-33x25-4.jpg", \
-           "login": "justin", \
-           "profile_header_bg_color": null, \
-           "location": "San Francisco" \
+            "name": "test_user1", \
+            "created_at": "2011-06-03T17:49:19Z", \
+            "updated_at": "2012-06-18T17:19:57Z", \
+            "_links": { \
+              "self": "https://api.twitch.tv/kraken/users/test_user1" \
+            }, \
+            "logo": "http://static-cdn.jtvnw.net/jtv_user_pictures/test_user1-profile_image-62e8318af864d6d7-300x300.jpeg", \
+            "_id": 22761313, \
+            "display_name": "test_user1", \
+            "email": "asdf@asdf.com", \
+            "partnered": true \
           }';
         
         callback(null, body, undefined);
@@ -75,8 +67,8 @@ vows.describe('TwitchtvStrategy').addBatch({
       },
       'should load profile' : function(err, profile) {
         assert.equal(profile.provider, 'twitchtv');
-        assert.equal(profile.id, '1698');
-        assert.equal(profile.username, 'twitch');
+        assert.equal(profile.id, '22761313');
+        assert.equal(profile.username, 'test_user1');
       },
       'should set raw property' : function(err, profile) {
         assert.isString(profile._raw);
