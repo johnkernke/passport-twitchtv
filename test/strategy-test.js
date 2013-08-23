@@ -8,9 +8,9 @@ vows.describe('TwitchtvStrategy').addBatch({
   
   'strategy': {
     topic: function() {
-      return new TwitchStrategy({
-        consumerKey: 'ABC123',
-        consumerSecret: 'secret'
+      return new TwitchtvStrategy({
+        clientID: 'ABC123',
+        clientSecret: 'secret'
       },
       function() {});
     },
@@ -22,22 +22,22 @@ vows.describe('TwitchtvStrategy').addBatch({
   
   'strategy when loading user profile': {
     topic: function() {
-      var strategy = new twitchStrategy({
-        consumerKey: 'ABC123',
-        consumerSecret: 'secret'
+      var strategy = new TwitchtvStrategy({
+        clientID: 'ABC123',
+        clientSecret: 'secret'
       },
       function() {});
       
       // mock
-      strategy._oauth.get = function(url, token, tokenSecret, callback) {
+      strategy._oauth2.get = function(url, accessToken, callback) {
         var body = '{ \
             "name": "test_user1", \
             "created_at": "2011-06-03T17:49:19Z", \
             "updated_at": "2012-06-18T17:19:57Z", \
             "_links": { \
-              "self": "https://api.twitch.tv/kraken/users/test_user1" \
+              "self": "https:\/\/api.twitch.tv\/kraken\/users\/test_user1" \
             }, \
-            "logo": "http://static-cdn.jtvnw.net/jtv_user_pictures/test_user1-profile_image-62e8318af864d6d7-300x300.jpeg", \
+            "logo": "http:\/\/static-cdn.jtvnw.net\/jtv_user_pictures\/test_user1-profile_image-62e8318af864d6d7-300x300.jpeg", \
             "_id": 22761313, \
             "display_name": "test_user1", \
             "email": "asdf@asdf.com", \
@@ -58,7 +58,7 @@ vows.describe('TwitchtvStrategy').addBatch({
         }
         
         process.nextTick(function () {
-          strategy.userProfile('token', 'token-secret', {}, done);
+          strategy.userProfile('accessToken', done);
         });
       },
       
@@ -82,13 +82,13 @@ vows.describe('TwitchtvStrategy').addBatch({
   'strategy when loading user profile and encountering an error': {
     topic: function() {
       var strategy = new TwitchtvStrategy({
-        consumerKey: 'ABC123',
-        consumerSecret: 'secret'
+        clientID: 'ABC123',
+        clientSecret: 'secret'
       },
       function() {});
       
       // mock
-      strategy._oauth.get = function(url, token, tokenSecret, callback) {
+      strategy._oauth2.get = function(url, accessToken, callback) {
         callback(new Error('something went wrong'));
       }
       
@@ -103,7 +103,7 @@ vows.describe('TwitchtvStrategy').addBatch({
         }
         
         process.nextTick(function () {
-          strategy.userProfile('token', 'token-secret', {}, done);
+          strategy.userProfile('accessToken', done);
         });
       },
       
