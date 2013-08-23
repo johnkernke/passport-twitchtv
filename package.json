@@ -1,0 +1,33 @@
+{
+    "name": "passport-twitchtv",
+    "version": "0.1.0",
+    "description": "Twitch.tv authentication strategy for Passport.",
+    "keywords": ["passport", "twitchtv", "auth", "authn", "authentication", "identity"],
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/johnkernke/passport-twitchtv.git"
+    },
+    "bugs": {
+        "url": "http://github.com/johnkernke/passport-twitchtv/issues"
+    },
+    "author": {
+        "name": "John Kernke",
+        "email": "john@kernke.org"
+    },
+    "licenses": [ {
+            "type": "MIT",
+            "url": "http://www.opensource.org/licences/MIT"
+    } ],
+    "main": "./lib/passport-twitchtv",
+    "dependencies": {
+        "pkginfo": "0.2.x",
+        "passport-oauth": "0.1.x"
+    },
+    "devDependencies": {
+        "vows": "0.6.x"
+    },
+    "scripts": {
+        "test": "NODE_PATH=lib node_modules/.bin/vows test/*-test.js"
+    },
+    "engines": { "node": ">= 0.4.0" }
+}
