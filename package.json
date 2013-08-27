@@ -15,8 +15,8 @@
         "email": "john@kernke.org"
     },
     "licenses": [ {
-            "type": "MIT",
-            "url": "http://www.opensource.org/licences/MIT"
+        "type": "MIT",
+        "url": "http://www.opensource.org/licences/MIT"
     } ],
     "main": "./lib/passport-twitchtv",
     "dependencies": {
