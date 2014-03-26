@@ -25,12 +25,13 @@ passport.deserializeUser(function(obj, done) {
 
 // Use the TwitchtvStrategy within Passport.
 //   Strategies in passport require a `verify` function, which accept
-//   credentials (in this case, a accessToken, refreshToken, and Twitch.tv profile),
+//   credentials (in this case, a accessToken, refreshToken, Twitch.tv profile, and scope required),
 //   and invoke a callback with a user object.
 passport.use(new TwitchtvStrategy({
     clientID: TWITCHTV_CLIENT_ID,
     clientSecret: TWITCHTV_CLIENT_SECRET,
-    callbackURL: "http://127.0.0.1:3000/auth/twitchtv/callback"
+    callbackURL: "http://127.0.0.1:3000/auth/twitchtv/callback",
+    scope: "user_read"
   },
   function(accessToken, refreshToken, profile, done) {
 
