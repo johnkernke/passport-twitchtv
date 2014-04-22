@@ -26,18 +26,20 @@ accepts these credentials and calls `done` providing a user, as well as
 
 A `scope` is required, all scopes are [available here](https://github.com/justintv/Twitch-API/blob/master/authentication.md#scopes)
 
-    passport.use(new TwitchtvStrategy({
-        clientID: TWITCHTV_CLIENT_ID,
-        clientSecret: TWITCHTV_CLIENT_SECRET,
-        callbackURL: "http://127.0.0.1:3000/auth/twitchtv/callback",
-        scope: "user_read"
-      },
-      function(accessToken, refreshToken, profile, done) {
-        User.findOrCreate({ twitchtvId: profile.id }, function (err, user) {
-          return done(err, user);
-        });
-      }
-    ));
+```javascript
+passport.use(new TwitchtvStrategy({
+    clientID: TWITCHTV_CLIENT_ID,
+    clientSecret: TWITCHTV_CLIENT_SECRET,
+    callbackURL: "http://127.0.0.1:3000/auth/twitchtv/callback",
+    scope: "user_read"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    User.findOrCreate({ twitchtvId: profile.id }, function (err, user) {
+      return done(err, user);
+    });
+  }
+));
+```
 
 #### Authenticate Requests
 
@@ -47,15 +49,17 @@ authenticate requests.
 For example, as route middleware in an [Express](http://expressjs.com/)
 application:
 
-    app.get('/auth/twitchtv',
-      passport.authenticate('twitchtv'));
-    
-    app.get('/auth/twitchtv/callback', 
-      passport.authenticate('twitchtv', { failureRedirect: '/login' }),
-      function(req, res) {
-        // Successful authentication, redirect home.
-        res.redirect('/');
-      });
+```javascript
+app.get('/auth/twitchtv', passport.authenticate('twitchtv'));
+
+app.get('/auth/twitchtv/callback', 
+  passport.authenticate('twitchtv', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  }
+);
+```
 
 ## Examples
 
@@ -77,4 +81,4 @@ For a complete, working example, refer to the [login example](https://github.com
 
 [The MIT License](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2011-2013 John Kernke
+Copyright (c) 2014 John Kernke
