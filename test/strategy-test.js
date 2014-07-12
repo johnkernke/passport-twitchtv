@@ -69,6 +69,7 @@ vows.describe('TwitchtvStrategy').addBatch({
         assert.equal(profile.provider, 'twitchtv');
         assert.equal(profile.id, '22761313');
         assert.equal(profile.username, 'test_user1');
+        assert.equal(profile.displayName, 'test_user1');
         assert.equal(profile.email, 'asdf@asdf.com');
       },
       'should set raw property' : function(err, profile) {

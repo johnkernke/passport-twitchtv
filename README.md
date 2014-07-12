@@ -76,6 +76,7 @@ For a complete, working example, refer to the [login example](https://github.com
 
   - [John Kernke](http://github.com/johnkernke)
   - [Jared Hanson](http://github.com/jaredhanson) (Used [passport-justintv](https://github.com/jaredhanson/passport-justintv) as a base to work off)
+  - [Fergus Leen](https://github.com/thgil) (Added displayName to profile)
 
 ## License
 
