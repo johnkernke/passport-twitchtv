@@ -5,6 +5,6 @@
     "express": ">= 0.0.0",
     "ejs": ">= 0.0.0",
     "passport": ">= 0.0.0",
-    "passport-justintv": ">= 0.0.0"
+    "passport-twitchtv": ">= 0.0.0"
   }
 }
