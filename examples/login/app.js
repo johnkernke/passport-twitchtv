@@ -1,7 +1,10 @@
-var express = require('express')
+var bodyParser   = require('body-parser')
+  , cookieParser = require('cookie-parser')
+  , engine       = require('ejs-locals')
+  , express = require('express')
   , passport = require('passport')
-  , util = require('util')
-  , TwitchtvStrategy = require('./lib/passport-twitchtv').Strategy;
+  , session      = require('express-session')
+  , TwitchtvStrategy = require('passport-twitchtv/lib/passport-twitchtv/index').Strategy;
 
 var TWITCHTV_CLIENT_ID = "--insert-twitchtv-client-id-here--";
 var TWITCHTV_CLIENT_SECRET = "--insert-twitchtv-client-secret-here--";
@@ -37,7 +40,7 @@ passport.use(new TwitchtvStrategy({
 
     // asynchronous verification, for effect...
     process.nextTick(function () {
-      
+
       // To keep the example simple, the user's Twitch.tv profile is returned to
       // represent the logged-in user.  In a typical application, you would want
       // to associate the Twitch.tv account with a user record in your database,
@@ -48,26 +51,20 @@ passport.use(new TwitchtvStrategy({
 ));
 
 
-
-
-var app = express.createServer();
+var app = express();
 
 // configure Express
-app.configure(function() {
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'ejs');
-  app.use(express.logger());
-  app.use(express.cookieParser());
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.session({ secret: 'keyboard cat' }));
-  // Initialize Passport!  Also use passport.session() middleware, to support
-  // persistent login sessions (recommended).
-  app.use(passport.initialize());
-  app.use(passport.session());
-  app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
-});
+app.engine('ejs', engine);
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({ secret: 'keyboard cat' }));
+// Initialize Passport!  Also use passport.session() middleware, to support
+// persistent login sessions (recommended).
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 app.get('/', function(req, res){
@@ -99,7 +96,7 @@ app.get('/auth/twitchtv',
 //   request.  If authentication fails, the user will be redirected back to the
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
-app.get('/auth/twitchtv/callback', 
+app.get('/auth/twitchtv/callback',
   passport.authenticate('twitchtv', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
@@ -120,5 +117,5 @@ app.listen(3000);
 //   login page.
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login')
+  res.redirect('/login');
 }
